@@ -5,11 +5,11 @@ import android.os.Bundle;
 
 import alexm.bytemessanger.R;
 
-public class NewServerActivity extends AppCompatActivity {
+public class FindActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_server);
+        setContentView(R.layout.activity_find);
     }
 }

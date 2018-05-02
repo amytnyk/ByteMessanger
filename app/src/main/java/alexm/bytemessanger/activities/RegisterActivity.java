@@ -49,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
                     socket.setTcpNoDelay(true);
                     os = socket.getOutputStream();
                     BufferedOutputStream bos = new BufferedOutputStream(os);
-                    bos.write(("r" + email.getText().toString() + "/:" + password.getText() + "\n").toString().getBytes());
+                    bos.write(("r" + email.getText().toString() + "/:" + password.getText().toString() + "/:" + name.getText().toString() +"\n").toString().getBytes());
                     bos.flush();
                     new Thread(new ClientThread()).start();
                     er.setText("Wrong login or password");

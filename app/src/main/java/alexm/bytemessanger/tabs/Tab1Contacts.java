@@ -1,6 +1,7 @@
 package alexm.bytemessanger.tabs;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import alexm.bytemessanger.R;
+import alexm.bytemessanger.activities.FindActivity;
+import alexm.bytemessanger.activities.MainActivity;
 import alexm.bytemessanger.activities.RoomActivity;
 import alexm.bytemessanger.adapters.ContactsAdapter;
 import alexm.bytemessanger.utils.Contact;
@@ -31,13 +34,24 @@ public class Tab1Contacts extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.tab1contacts, container, false);
-        updateDatabase(rootView);
+
+        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.new_contact);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), FindActivity.class);
+                startActivity(intent);
+            }
+        });
+        lv = (ListView) rootView.findViewById(R.id.contacts_list);
+        //updateDatabase();
         return rootView;
     }
 
     public List<Contact> contacts;
+    public ListView lv;
 
-    private void updateDatabase(View rootView) {
+    private void updateDatabase() {
 
         contacts = new ArrayList<>();
         GroupChannelListQuery channelListQuery = GroupChannel.createMyGroupChannelListQuery();
@@ -52,24 +66,33 @@ public class Tab1Contacts extends Fragment {
                 for (GroupChannel gc:
                         list) {
                     if (gc.isDistinct()) {
-                        String name = gc.getMembers().get(0).getUserId().equals(SendBird.getCurrentUser().getUserId()) ? gc.getMembers().get(0).getNickname() : gc.getMembers().get(1).getNickname();
+                        String name = gc.getMembers().get(0).getUserId().equals(SendBird.getCurrentUser().getUserId()) ? gc.getMembers().get(1).getNickname() : gc.getMembers().get(0).getNickname();
                         contacts.add(new Contact(gc.getUrl(), name, gc.getUnreadMessageCount()));
                     }
                 }
+
+
+                ContactsAdapter sa = new ContactsAdapter(getContext(), contacts);
+                lv.setAdapter(sa);
+                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent intent = new Intent(getActivity(), RoomActivity.class);
+                        intent.putExtra("Name", contacts.get(position).contact_ID);
+                        intent.putExtra("CanInvite", "false");
+                        startActivity(intent);
+                    }
+                });
+                sa.notifyDataSetChanged();
             }
         });
 
-        ContactsAdapter sa = new ContactsAdapter(getContext(), contacts);
-        ListView s = (ListView) rootView.findViewById(R.id.contacts_list);
-        s.setAdapter(sa);
-        s.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), RoomActivity.class);
-                intent.putExtra("Name", contacts.get(position).contact_name);
-                startActivity(intent);
-            }
-        });
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateDatabase();
     }
 }

@@ -15,6 +15,7 @@ import android.widget.ListView;
 
 import com.sendbird.android.GroupChannel;
 import com.sendbird.android.GroupChannelListQuery;
+import com.sendbird.android.SendBird;
 import com.sendbird.android.SendBirdException;
 import com.sendbird.android.UserMessage;
 
@@ -37,7 +38,7 @@ public class Tab2Servers extends Fragment {
 
         final View rootView = inflater.inflate(R.layout.tab2servers, container, false);
         s = (ListView) rootView.findViewById(R.id.servers);
-        refresh();
+        //refresh();
 
         FloatingActionButton create_server = (FloatingActionButton) rootView.findViewById(R.id.create_server);
         create_server.setOnClickListener(new View.OnClickListener() {
@@ -51,7 +52,15 @@ public class Tab2Servers extends Fragment {
                 create.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ad.cancel();
+                        List<String> userIDS = new ArrayList<>();
+                        userIDS.add(SendBird.getCurrentUser().getUserId());
+                        GroupChannel.createChannelWithUserIds(userIDS, false, mName.getText().toString(), null, null, new GroupChannel.GroupChannelCreateHandler() {
+                            @Override
+                            public void onResult(GroupChannel groupChannel, SendBirdException e) {
+                                refresh();
+                                ad.cancel();
+                            }
+                        });
                     }
                 });
 
@@ -95,6 +104,7 @@ public class Tab2Servers extends Fragment {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent intent = new Intent(getActivity(), RoomActivity.class);
                         intent.putExtra("Name", servers.get(position).ID);
+                        intent.putExtra("CanInvite", "true");
                         startActivity(intent);
                     }
                 });

@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         SendBird.connect(id, new SendBird.ConnectHandler() {
             @Override
             public void onConnected(User user, SendBirdException e) {
-                Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
                 //setSupportActionBar(toolbar);
                 // Create the adapter that will return a fragment for each of the three
                 // primary sections of the activity.
@@ -50,30 +49,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
-        // Set up the ViewPager with the sections adapter.
-
-        /*mDrawerLayout = findViewById(R.id.);
-
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        // set item as selected to persist highlight
-                        menuItem.setChecked(true);
-                        // close drawer when item is tapped
-                        mDrawerLayout.closeDrawers();
-
-                        // Add code here to update the UI based on the item selected
-                        // For example, swap UI fragments here
-
-                        return true;
-                    }
-                });*/
 
     }
 

@@ -5,8 +5,8 @@
     android:id="@+id/activity_room"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:layout_margin="10dp">
+    android:layout_margin="10dp"
+    android:fitsSystemWindows="true">
 
 
     <android.support.design.widget.FloatingActionButton
@@ -22,23 +22,49 @@
 
     <ListView
         android:id="@+id/messages"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="348dp"
+        android:layout_height="480dp"
         android:layout_alignBottom="@+id/send"
         android:divider="@null"
         android:dividerHeight="0dp"
         app:layout_constraintBottom_toTopOf="@id/send"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="308dp"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/invite"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="true"
+        app:srcCompat="@drawable/invite"
+        tools:layout_editor_absoluteX="308dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <hani.momanii.supernova_emoji_library.Helper.EmojiconEditText
+        android:id="@+id/editText2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:ems="10"
-        android:hint="Type your message here..."
-        android:inputType="textPersonName"
+        android:hint="Type text here...."
+        android:inputType="textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="499dp" />
+        app:layout_constraintEnd_toStartOf="@+id/send"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView7" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@mipmap/ic_launcher" />
 
 </android.support.constraint.ConstraintLayout>

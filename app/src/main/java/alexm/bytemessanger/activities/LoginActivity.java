@@ -55,7 +55,6 @@ public class LoginActivity extends AppCompatActivity {
                     bos.write(("l" + email.getText().toString() + "/:" + password.getText() + "\n").toString().getBytes());
                     bos.flush();
                     new Thread(new ClientThread()).start();
-                    er.setText("Wrong login or password");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -121,6 +120,9 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.putExtra("key", answer);
                     startActivity(intent);
+                }
+                else {
+                    er.setText(getString(R.string.wrong_login_or_password));
                 }
             } catch (UnknownHostException e1) {
                 e1.printStackTrace();

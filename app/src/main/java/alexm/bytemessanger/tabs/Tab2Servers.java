@@ -2,6 +2,7 @@ package alexm.bytemessanger.tabs;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.sendbird.android.GroupChannel;
 import com.sendbird.android.GroupChannelListQuery;
@@ -38,7 +40,9 @@ public class Tab2Servers extends Fragment {
 
         final View rootView = inflater.inflate(R.layout.tab2servers, container, false);
         s = (ListView) rootView.findViewById(R.id.servers);
-        //refresh();
+
+        pb = (ProgressBar) rootView.findViewById(R.id.pb);
+        pb.setVisibility(View.INVISIBLE);
 
         FloatingActionButton create_server = (FloatingActionButton) rootView.findViewById(R.id.create_server);
         create_server.setOnClickListener(new View.OnClickListener() {
@@ -114,10 +118,35 @@ public class Tab2Servers extends Fragment {
 
     }
 
+    public ProgressBar pb;
+
     @Override
     public void onResume() {
         super.onResume();
-        refresh();
+        LoadTask lt = new LoadTask();
+        lt.execute();
+    }
+
+    class LoadTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            //pb.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            refresh();
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            //pb.setVisibility(View.INVISIBLE);
+        }
     }
 
     public AlertDialog ad;

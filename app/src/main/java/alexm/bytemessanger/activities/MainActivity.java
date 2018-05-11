@@ -1,5 +1,6 @@
 package alexm.bytemessanger.activities;
 
+import android.os.AsyncTask;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -12,6 +13,8 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.sendbird.android.SendBird;
 import com.sendbird.android.SendBirdException;
@@ -32,24 +35,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        String id = getIntent().getStringExtra("key");
-        SendBird.connect(id, new SendBird.ConnectHandler() {
-            @Override
-            public void onConnected(User user, SendBirdException e) {
-                //setSupportActionBar(toolbar);
-                // Create the adapter that will return a fragment for each of the three
-                // primary sections of the activity.
-                mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-                mViewPager = (ViewPager) findViewById(R.id.container);
-                mViewPager.setAdapter(mSectionsPagerAdapter);
-                String us = SendBird.getCurrentUser().getNickname();
-                TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-                tabLayout.setupWithViewPager(mViewPager);
 
-            }
-        });
-
-
+        pb = (ProgressBar) findViewById(R.id.pb);
+        LoadTask lt = new LoadTask();
+        lt.execute();
     }
 
 
@@ -73,6 +62,59 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    ProgressBar pb;
+
+    class LoadTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    pb.setVisibility(View.VISIBLE);
+                }
+            });
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            String id = getIntent().getStringExtra("key");
+            SendBird.connect(id, new SendBird.ConnectHandler() {
+                @Override
+                public void onConnected(User user, SendBirdException e) {
+                    //setSupportActionBar(toolbar);
+                    // Create the adapter that will return a fragment for each of the three
+                    // primary sections of the activity.
+                    mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+                    mViewPager = (ViewPager) findViewById(R.id.container);
+                    mViewPager.setAdapter(mSectionsPagerAdapter);
+                    TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+                    tabLayout.setupWithViewPager(mViewPager);
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            pb.setVisibility(View.INVISIBLE);
+                        }
+                    });
+
+                }
+            });
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -110,11 +152,11 @@ public class MainActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Contacts";
+                    return getString(R.string.contacts);
                 case 1:
-                    return "Servers";
+                    return getString(R.string.servers);
                 case 2:
-                    return "Account";
+                    return getString(R.string.account);
             }
             return null;
         }

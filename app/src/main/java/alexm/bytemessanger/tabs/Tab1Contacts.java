@@ -1,6 +1,7 @@
 package alexm.bytemessanger.tabs;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.sendbird.android.GroupChannel;
 import com.sendbird.android.GroupChannelListQuery;
@@ -34,6 +36,9 @@ public class Tab1Contacts extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.tab1contacts, container, false);
+
+        pb = (ProgressBar) rootView.findViewById(R.id.pb);
+        pb.setVisibility(View.INVISIBLE);
 
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.new_contact);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -90,9 +95,34 @@ public class Tab1Contacts extends Fragment {
 
     }
 
+    public ProgressBar pb;
+
     @Override
     public void onResume() {
         super.onResume();
-        updateDatabase();
+        LoadTask lt = new LoadTask();
+        lt.execute();
+        
+    }
+
+    class LoadTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            //pb.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            updateDatabase();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            //pb.setVisibility(View.INVISIBLE);
+        }
     }
 }

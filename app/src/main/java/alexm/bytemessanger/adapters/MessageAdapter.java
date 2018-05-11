@@ -6,14 +6,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sendbird.android.SendBird;
+import com.squareup.picasso.Picasso;
 
 import java.util.Date;
 import java.util.List;
 
 import alexm.bytemessanger.R;
+import alexm.bytemessanger.utils.CircleTransform;
 import alexm.bytemessanger.utils.Message;
 
 /**
@@ -59,9 +62,9 @@ public class MessageAdapter extends BaseAdapter {
             Message s = getMessage(position);
             TextView messsage_text = (TextView) view.findViewById(R.id.message_text);
             messsage_text.setText(s.text);
-            TextView time = (TextView) view.findViewById(R.id.message_time);
-            String dateString = DateFormat.format("MM.dd (hh:mm)", new Date(s.time)).toString();
-            time.setText(dateString);
+            //TextView time = (TextView) view.findViewById(R.id.message_time);
+            //String dateString = DateFormat.format("MM.dd (hh:mm)", new Date(s.time)).toString();
+            //time.setText(dateString);
 
         } else {
             // Other Message
@@ -69,9 +72,11 @@ public class MessageAdapter extends BaseAdapter {
             Message s = getMessage(position);
             TextView messsage_text = (TextView) view.findViewById(R.id.message_text);
             messsage_text.setText(s.text);
-            TextView time = (TextView) view.findViewById(R.id.message_time);
-            String dateString = DateFormat.format("MM.dd (hh:mm)", new Date(s.time)).toString();
-            time.setText(dateString);
+            ImageView iv = (ImageView) view.findViewById(R.id.imageView2);
+            Picasso.get().load(s.avatar_URL).resize(100, 100).centerCrop().transform(new CircleTransform()).into(iv);
+            //TextView time = (TextView) view.findViewById(R.id.message_time);
+            //String dateString = DateFormat.format("MM.dd (hh:mm)", new Date(s.time)).toString();
+            //time.setText(dateString);
         }
 
         //view.findViewById(R.id.ivImage)).setImageResource(p.image);

@@ -42,7 +42,7 @@
         android:layout_centerHorizontal="true"
         android:background="@android:color/holo_orange_dark"
         android:padding="10dp"
-        android:text="Sign in"
+        android:text="@string/sign_in"
         android:textColor="@android:color/background_light"
         android:textStyle="bold" />
 
@@ -54,11 +54,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:background="@android:color/holo_orange_dark"
-        android:text="Register"
+        android:text="@string/register"
         android:textColor="@android:color/background_light" />
 
     <Button
-        android:text="Forgot password?"
+        android:text="@string/forgot_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
@@ -86,9 +86,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/email_login"
         android:layout_centerHorizontal="true"
-        android:hint="Password"
+        android:hint="@string/password_hint"
         android:imeActionId="@+id/login"
-        android:imeActionLabel="@string/action_sign_in_short"
         android:imeOptions="actionUnspecified"
         android:inputType="textPassword"
         android:maxLines="1"

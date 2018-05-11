@@ -32,8 +32,7 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <de.hdodenhof.circleimageview.CircleImageView
-
+    <ImageView
         android:id="@+id/profile_image"
         android:layout_width="96dp"
         android:layout_height="96dp"
@@ -48,7 +47,7 @@
         android:layout_below="@+id/profile_image"
         android:layout_centerHorizontal="true"
         android:ems="10"
-        android:hint="Name"
+        android:hint="@string/name"
         android:inputType="textEmailAddress"
         android:textAlignment="center" />
 
@@ -58,7 +57,7 @@
         android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/email"
-        android:hint="E-Mail"
+        android:hint="@string/e_mail"
         android:textAlignment="center"
         android:layout_below="@+id/name"
         android:layout_alignStart="@+id/name" />
@@ -69,7 +68,7 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/password"
-        android:hint="Password"
+        android:hint="@string/password_hint"
         android:textAlignment="center"
         android:layout_below="@+id/email"
         android:layout_alignStart="@+id/email"
@@ -82,7 +81,7 @@
         android:layout_below="@+id/password"
         android:layout_centerHorizontal="true"
         android:background="@android:color/holo_orange_dark"
-        android:text="Register"
+        android:text="@string/register"
         android:textColor="@android:color/background_light" />
 
     <Button
@@ -93,7 +92,7 @@
         android:layout_centerHorizontal="true"
         android:background="@android:color/holo_orange_dark"
         android:padding="10dp"
-        android:text="Back to login"
+        android:text="@string/back_to_login"
         android:textColor="@android:color/background_light" />
 
     <TextView

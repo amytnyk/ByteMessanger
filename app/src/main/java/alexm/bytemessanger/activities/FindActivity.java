@@ -44,9 +44,9 @@ public class FindActivity extends AppCompatActivity {
         fa = new FoundAdapter(this, users);
         lv = (ListView) findViewById(R.id.found);
         lv.setAdapter(fa);
-        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 List<String> userIDS = new ArrayList<>();
                 userIDS.add(SendBird.getCurrentUser().getUserId());
                 userIDS.add(users.get(position).id);
@@ -56,7 +56,6 @@ public class FindActivity extends AppCompatActivity {
                         finish();
                     }
                 });
-                return false;
             }
         });
 
@@ -97,8 +96,10 @@ public class FindActivity extends AppCompatActivity {
                 String answer = br.readLine();
                 String[] us = answer.split("/:");
                 users.clear();
+                String id = SendBird.getCurrentUser().getUserId();
                 for (int i = 0;i < us.length;i += 2) {
-                    users.add(new FoundItem(us[i], us[i + 1]));
+                    if (!us[i].equals(id))
+                        users.add(new FoundItem(us[i], us[i + 1]));
                 }
                 runOnUiThread(new Runnable() {
                     @Override

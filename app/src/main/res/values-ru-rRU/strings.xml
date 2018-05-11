@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ByteMessanger</string>
+    <string name="enable_gps">Включить GPS</string>
+    <string name="register">Зарегистрироватся</string>
+    <string name="forgot_password">Забили пароль?</string>
+    <string name="password_hint">Пароль</string>
+    <string name="sign_in">Войти</string>
+    <string name="name">Имя</string>
+    <string name="e_mail">Електронная почта</string>
+    <string name="back_to_login">Вернутся</string>
+    <string name="wrong_login_or_password">Неправильний пароль</string>
+    <string name="email_exits">Пользователь с етим e-mail уже существует</string>
+    <string name="contacts">Контакти</string>
+    <string name="servers">Комнати</string>
+    <string name="account">Профиль</string>
+</resources>

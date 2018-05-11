@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ByteMessanger</string>
+    <string name="enable_gps">Увімкнути GPS</string>
+    <string name="register">Зареєструватися</string>
+    <string name="forgot_password">Забули пароль?</string>
+    <string name="password_hint">Пароль</string>
+    <string name="sign_in">Увійти</string>
+    <string name="name">І\'мя</string>
+    <string name="e_mail">Електронна пошта</string>
+    <string name="back_to_login">Повернутися</string>
+    <string name="wrong_login_or_password">Неправильний пароль</string>
+    <string name="email_exits">Користувач із цим e-mail вже існує</string>
+    <string name="servers">Кімнати</string>
+    <string name="account">Профіль</string>
+    <string name="contacts">Контакти</string>
+</resources>

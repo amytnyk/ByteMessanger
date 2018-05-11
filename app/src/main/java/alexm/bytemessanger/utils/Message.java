@@ -11,12 +11,14 @@ public class Message {
     public String owner;
     public String ownerID;
     public long time;
+    public String avatar_URL;
 
 
-    public Message(String text, String owner,String ownerID, long time) {
+    public Message(String text, String owner,String ownerID, long time, String avatar_URL) {
         this.text = text;
         this.owner = owner;
         this.ownerID = ownerID;
         this.time = time;
+        this.avatar_URL = avatar_URL;
     }
 }

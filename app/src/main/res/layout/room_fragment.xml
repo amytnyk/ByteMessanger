@@ -9,62 +9,78 @@
     android:fitsSystemWindows="true">
 
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/send"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@drawable/ic_menu_send" />
 
-    <ListView
-        android:id="@+id/messages"
-        android:layout_width="348dp"
-        android:layout_height="480dp"
-        android:layout_alignBottom="@+id/send"
-        android:divider="@null"
-        android:dividerHeight="0dp"
-        app:layout_constraintBottom_toTopOf="@id/send"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/invite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
         android:clickable="true"
         app:srcCompat="@drawable/invite"
         tools:layout_editor_absoluteX="308dp"
         tools:layout_editor_absoluteY="0dp" />
 
-    <hani.momanii.supernova_emoji_library.Helper.EmojiconEditText
-        android:id="@+id/editText2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:ems="10"
-        android:hint="Type text here...."
-        android:inputType="textMultiLine"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/send"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/imageView7" />
-
-    <ImageView
-        android:id="@+id/imageView7"
+    <ListView
+        android:id="@+id/messages"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@mipmap/ic_launcher" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:divider="@null"
+        android:dividerHeight="0dp"
 
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/ll"
+        app:layout_constraintVertical_bias="1"/>
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+        <hani.momanii.supernova_emoji_library.Helper.EmojiconEditText
+            android:id="@+id/editText2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="16dp"
+            android:layout_toLeftOf="@id/send"
+            android:layout_toRightOf="@id/imageView7"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Type text here...."
+
+            android:inputType="textMultiLine"
+
+            android:maxLines="6" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:clickable="true"
+            app:srcCompat="@drawable/ic_menu_send"
+            android:gravity="center"
+            android:layout_gravity="bottom"/>
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true" />
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

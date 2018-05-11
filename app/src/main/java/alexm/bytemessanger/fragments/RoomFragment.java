@@ -2,6 +2,7 @@ package alexm.bytemessanger.fragments;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -113,8 +114,6 @@ public class RoomFragment extends Fragment {
             }
         });
 
-
-        //GroupChannel.getChannel("sendbird_group_channel_63704736_4536f647226315eaf0e722bbc9dfd1bc03aa4bd9", new GroupChannel.GroupChannelGetHandler() {
         GroupChannel.getChannel(name, new GroupChannel.GroupChannelGetHandler() {
             @Override
             public void onResult(GroupChannel groupChannel, SendBirdException e) {
@@ -153,6 +152,16 @@ public class RoomFragment extends Fragment {
                 refresh_messages();
                 ma = new MessageAdapter(getContext(), messages, SendBird.getCurrentUser().getUserId());
                 lv = (ListView) mv.findViewById(R.id.messages);
+                lv.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+                lv.setSelector(new ColorDrawable(2));
+                lv.setItemsCanFocus(true);
+                lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                    @Override
+                    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                        lv.setItemChecked(position, true);
+                        return false;
+                    }
+                });
                 lv.setAdapter(ma);
 
 
@@ -182,7 +191,7 @@ public class RoomFragment extends Fragment {
                 for (BaseMessage bm:
                         mes) {
                     UserMessage message = (UserMessage) bm;
-                    messages.add(0, new Message(message.getMessage(), message.getSender().getNickname(), message.getSender().getUserId(), message.getCreatedAt()));
+                    messages.add(0, new Message(message.getMessage(), message.getSender().getNickname(), message.getSender().getUserId(), message.getCreatedAt(), message.getSender().getProfileUrl()));
                     ma.notifyDataSetChanged();
                 }
             }

@@ -1,6 +1,11 @@
 package alexm.bytemessanger.adapters;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +15,10 @@ import android.widget.TextView;
 import java.util.List;
 
 import alexm.bytemessanger.R;
+import alexm.bytemessanger.activities.RoomActivity;
+import alexm.bytemessanger.fragments.MapsFragment;
+import alexm.bytemessanger.fragments.RoomFragment;
+import alexm.bytemessanger.tabs.Tab2Servers;
 import alexm.bytemessanger.utils.Server;
 
 /**
@@ -55,10 +64,13 @@ public class ServersAdapter extends BaseAdapter {
             view = lInflater.inflate(R.layout.item, parent, false);
         }
 
+        //
         Server s = getServer(position);
 
         // заполняем View в пункте списка данными из товаров: наименование, цена
         // и картинка
+
+
         TextView server_name = (TextView) view.findViewById(R.id.server_name);
         server_name.setText(s.server_name);
         TextView new_messages = (TextView) view.findViewById(R.id.new_messages);

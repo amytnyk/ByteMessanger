@@ -41,21 +41,9 @@ public class LoginActivity extends AppCompatActivity {
         login_btn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                OutputStream os = null;
                 try {
-                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-                            .permitAll().build();
-                    StrictMode.setThreadPolicy(policy);
-
-                    InetAddress serverAddr = InetAddress.getByName(SERVER_IP);
-                    socket = new Socket(serverAddr, SERVERPORT);
-                    socket.setTcpNoDelay(true);
-                    os = socket.getOutputStream();
-                    BufferedOutputStream bos = new BufferedOutputStream(os);
-                    bos.write(("l" + email.getText().toString() + "/:" + password.getText() + "\n").toString().getBytes());
-                    bos.flush();
                     new Thread(new ClientThread()).start();
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -74,14 +62,6 @@ public class LoginActivity extends AppCompatActivity {
         register.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (socket != null) {
-                    try {
-                        socket.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
             }
@@ -105,6 +85,24 @@ public class LoginActivity extends AppCompatActivity {
     class ClientThread implements Runnable {
         @Override
         public void run() {
+            OutputStream os = null;
+            try {
+                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                        .permitAll().build();
+                StrictMode.setThreadPolicy(policy);
+
+                InetAddress serverAddr = InetAddress.getByName(SERVER_IP);
+                socket = new Socket(serverAddr, SERVERPORT);
+                socket.setTcpNoDelay(true);
+                os = socket.getOutputStream();
+                BufferedOutputStream bos = new BufferedOutputStream(os);
+                bos.write(("l" + email.getText().toString() + "/:" + password.getText() + "\n").toString().getBytes());
+                bos.flush();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             try {
                 StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                         .permitAll().build();
@@ -122,7 +120,12 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else {
-                    er.setText(getString(R.string.wrong_login_or_password));
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            er.setText(getString(R.string.wrong_login_or_password));
+                        }
+                    });
                 }
             } catch (UnknownHostException e1) {
                 e1.printStackTrace();

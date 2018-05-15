@@ -20,6 +20,7 @@ allprojects {
             url "https://maven.google.com"
         }
         maven { url "https://raw.githubusercontent.com/smilefam/SendBird-SDK-Android/master/" }
+        maven { url "https://dl.bintray.com/hani-momanii/maven"}
     }
 }
 

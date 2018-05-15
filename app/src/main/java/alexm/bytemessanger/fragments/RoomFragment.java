@@ -2,6 +2,8 @@ package alexm.bytemessanger.fragments;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.database.sqlite.SQLiteOpenHelper;
 
 import com.sendbird.android.BaseChannel;
 import com.sendbird.android.BaseMessage;
@@ -31,6 +34,7 @@ import alexm.bytemessanger.adapters.InviteAdapter;
 import alexm.bytemessanger.adapters.MessageAdapter;
 import alexm.bytemessanger.utils.InviteItem;
 import alexm.bytemessanger.utils.Message;
+import alexm.bytemessanger.utils.DBHelper;
 
 import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
 import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText;
@@ -179,6 +183,40 @@ public class RoomFragment extends Fragment {
     }
 
     public void refresh_messages() {
+        /*DBHelper dbHelper = new DBHelper(getContext());
+        final SQLiteDatabase database = dbHelper.getWritableDatabase();
+
+        String selection = COLUMN_NAME_CHANNEL_URL + " = ?";
+        String[] selectionArgs = { CURRENT_CHANNEL_URL };
+
+        String sortOrder = COLUMN_NAME_TIMESTAMP + " DESC";
+
+        Cursor cursor = database.query(
+                TABLE_NAME,
+                null, // The columns to return; all if null.
+                selection, // The columns for the WHERE clause
+                selectionArgs, // The values for the WHERE clause
+                null, // Don't group the rows
+                null, // Don't filter by row groups
+                sortOrder, // The sort order
+                "30" // The limit
+        );
+
+        // Create a List of BaseMessages by deserializing each item.
+        List<BaseMessage> prevMessageList = new ArrayList<>();
+
+        while (cursor.moveToNext()) {
+            byte[] data = cursor.getBlob(cursor.getColumnIndex(COLUMN_NAME_PAYLOAD));
+            BaseMessage message = BaseMessage.buildFromSerializedData(data);
+            prevMessageList.add(message);
+        }
+
+        cursor.close();
+
+        */
+
+
+
         PreviousMessageListQuery prevMessageListQuery = this.gc.createPreviousMessageListQuery();
         prevMessageListQuery.load(30, true, new PreviousMessageListQuery.MessageListQueryResult() {
             @Override

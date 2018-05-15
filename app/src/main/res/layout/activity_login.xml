@@ -7,40 +7,15 @@
     android:orientation="vertical"
     tools:context="alexm.bytemessanger.activities.LoginActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar2"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Byte Messanger "/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="62dp"
-            android:text="Login"
-            android:textSize="20dp" />
-
-
-    </android.support.v7.widget.Toolbar>
-
 
     <Button
         android:id="@+id/sign_in_button"
         style="?android:textAppearanceSmall"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/password"
         android:layout_centerHorizontal="true"
-        android:background="@android:color/holo_orange_dark"
+        android:background="@drawable/button"
         android:padding="10dp"
         android:text="@string/sign_in"
         android:textColor="@android:color/background_light"
@@ -48,12 +23,12 @@
 
     <Button
         android:id="@+id/register_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/sign_in_button"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:background="@android:color/holo_orange_dark"
+        android:background="@drawable/button"
         android:text="@string/register"
         android:textColor="@android:color/background_light" />
 
@@ -62,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:background="@android:color/holo_orange_dark"
+        android:background="@drawable/button"
         android:textColor="@android:color/background_light"
         android:id="@+id/fp"
         android:layout_alignParentBottom="true"
@@ -73,11 +48,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="61dp"
+        android:layout_below="@+id/textView2"
         android:ems="10"
         android:hint="E-Mail"
         android:inputType="textEmailAddress"
+        android:layout_marginTop="20dp"
         android:textAlignment="center" />
 
     <EditText
@@ -119,6 +94,18 @@
         android:layout_centerInParent="true"
         android:checked="true"
         android:text="Remember me" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="Login"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
 
 
 </RelativeLayout>

@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.sendbird.android.SendBird;
 import com.sendbird.android.SendBirdException;
 import com.sendbird.android.User;
+import com.squareup.picasso.Picasso;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -34,6 +35,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import alexm.bytemessanger.R;
+import alexm.bytemessanger.utils.CircleTransform;
 import alexm.bytemessanger.utils.RoundImage;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -100,24 +102,9 @@ public class RegisterActivity extends AppCompatActivity {
 
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
             Uri selectedImage = data.getData();
-            String[] filePathColumn = { MediaStore.Images.Media.DATA };
-
-            Cursor cursor = getContentResolver().query(selectedImage,
-                    filePathColumn, null, null, null);
-            cursor.moveToFirst();
-
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            String picturePath = cursor.getString(columnIndex);
-            cursor.close();
-
             ImageView imageView = (ImageView) findViewById(R.id.profile_image);
-            Bitmap bm = BitmapFactory.decodeFile(picturePath);
-            RoundImage roundedImage = new RoundImage(bm);
-            imageView.setImageDrawable(roundedImage);
-
+            Picasso.get().load(selectedImage).resize(200, 200).centerCrop().transform(new CircleTransform()).into(imageView);
         }
-
-
     }
 
     @Override
